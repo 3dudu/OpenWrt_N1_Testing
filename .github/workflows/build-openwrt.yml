@@ -72,6 +72,9 @@ jobs:
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
+    - name: fix helloworld
+      run: cd openwrt && sed -i '60s/Include/on/g' package/helloworld/luci-app-ssr-plus/Makefile
+
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
