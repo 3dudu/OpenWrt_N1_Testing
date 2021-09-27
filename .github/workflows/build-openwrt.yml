@@ -188,4 +188,15 @@ jobs:
         keep_latest: 3
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+  
+  over:
+    needs: [build]
+    runs-on: ubuntu-20.04
+    steps:
+    - name: 打包
+      run: |
+        curl -X POST https://api.github.com/repos/3dudu/N1HK1dabao/dispatches \ 
+        -H "Accept: application/vnd.github.everest-preview+json" \
+        -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --data '{"event_type": "openwrt"}'
